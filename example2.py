@@ -24,3 +24,27 @@ print("Title of the page:", soup.title.text)
 
 intro_text = soup.find('p', class_='intro').text
 print("Intro text:", intro_text)
+
+#Example 3
+div_content = soup.find('div', id='content')
+links = div_content.find_all('a')
+for link in links:
+    print("Link:", link['href'])
+
+#example 4
+first_link = soup.find('a')
+print("First link text:", first_link.text)
+
+print("Next sibling of the first link:", first_link.next_sibling)
+
+#Example 5
+paragraphs  = soup.select('div#content p')
+for paragraph in paragraphs:
+    print("Paragraphs inside content: ", paragraph.text)
+
+#Example 6
+new_tag = soup.new_tag('b')
+new_tag.string = "Important"
+soup.h1.append(new_tag)
+
+print("Modified h1 tag:", soup.h1)
