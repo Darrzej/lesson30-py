@@ -8,7 +8,7 @@ headers = {
 }
 
 def get_page_content(url):
-    response = requests.get(url, header=headers=)
+    response = requests.get(url, header=headers)
     if response.status_code == 200:
         return response.content
     return None
@@ -62,4 +62,12 @@ def scrape_multiple_pages(base_url, num_pages):
             print(f"Failed to retrieve content from {url}")
     return all_articles
 
-base_url = "https://www.technewsworld.com"
+base_url = "https://www.technewsworld.com/section/technology"
+num_pages = 5
+all_articles = scrape_multiple_pages(base_url, num_pages)
+
+df = pd.DataFrame(all_articles)
+
+df.to_csv('technewsworld_articles.csv', index=False)
+
+print("Articles have been saved to technewsworld_articles.csv")
